@@ -16,6 +16,13 @@ $routes->get('/', 'Home::index');
 // Dashboard (redirect to admin dashboard)
 $routes->get('dashboard', 'Dashboard::index', ['namespace' => 'App\Controllers\Admin']);
 
+// BLOCK direct access to /admin - must be defined BEFORE admin route group
+$routes->get('admin', function () {
+    // Block direct access to /admin root URL
+    // Redirect to login page instead of showing 404
+    return redirect()->to(site_url('login'));
+});
+
 // Static pages
 $routes->get('about', 'Page::about');
 $routes->get('contact', 'Home::contact');      // Or Page::contact if you prefer
@@ -115,11 +122,32 @@ $routes->get('subscriptions/(:segment)',     'Subscriptions::show/$1');
 $routes->post('subscriptions/add-to-cart',   'Subscriptions::addToCart');
 
 // ---------------------------------------------------------
+// AUTHENTICATION ROUTES
+// ---------------------------------------------------------
+
+// Customer authentication routes
+$routes->get('customer/login',       'CustomerAuth::showLogin');
+$routes->post('customer/login',      'CustomerAuth::login');
+$routes->get('customer/logout',      'CustomerAuth::logout');
+
+// Admin authentication routes (separate from customer)
+$routes->get('admin/login', '\App\Controllers\Admin\Auth::showLogin');
+$routes->post('admin/login', '\App\Controllers\Admin\Auth::login');
+$routes->get('admin/logout', '\App\Controllers\Admin\Auth::logout');
+
+// General login route (redirect to admin login for now)
+$routes->get('login', function () {
+    return redirect()->to(site_url('admin/login'));
+});
+$routes->post('login', '\App\Controllers\Admin\Auth::login');
+$routes->get('logout', '\App\Controllers\Admin\Auth::logout');
+
+// ---------------------------------------------------------
 // ADMIN AREA
 // URL prefix: /admin/...
 // ---------------------------------------------------------
 
-$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static function (RouteCollection $routes) {
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'adminAuth'], static function (RouteCollection $routes) {
 
     // Dashboard
     $routes->get('dashboard', 'Dashboard::index');
@@ -127,8 +155,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], static functio
     // TEMPORARY: Test Change Menu (REMOVE AFTER TESTING)
     $routes->get('test-change-menu', function () {return view('admin/test_change_menu');});
 
-    // Redirect /admin -> /admin/dashboard
-    $routes->addRedirect('/', 'dashboard');
+    // Redirect /admin -> /admin/dashboard (handled above)
 
     // ----------------- PRODUCTS -----------------
     $routes->get('products',                    'Products::index');

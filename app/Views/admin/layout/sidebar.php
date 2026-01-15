@@ -74,7 +74,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="text-danger-hover">
+            <a href="<?= base_url('admin/logout') ?>" class="text-danger-hover">
                 <i class="bi bi-box-arrow-right"></i> Logout
             </a>
         </li>

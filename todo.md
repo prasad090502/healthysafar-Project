@@ -1,5 +1,13 @@
 # TODO List for Admin Menu and Subscription Management
 
+## Admin Route Protection Task
+- [x] Implement session-based authentication with isAdminLogged flag
+- [x] Create AdminAuthFilter in app/Filters/
+- [x] Register filter in app/Config/Filters.php
+- [x] Apply filter to admin routes using route groups in app/Config/Routes.php
+- [x] Exclude admin login and logout routes from filter
+- [x] Test direct URL access to admin pages redirects to login without authentication
+
 ## Original Task: Fix MenuController.php
 - [x] Rename class from 'Menus' to 'MenuController' for consistency
 - [x] Add validation to store method for menu_name and weekday
@@ -17,6 +25,13 @@
   - Edit an existing menu using the "Edit" button.
   - Verify that changes are saved and reflected in the list.
 
+## Security Enhancements: Basic Security Checks
+- [x] Add role check for admin in AdminAuthFilter
+- [x] Implement session timeout enforcement in AdminAuthFilter
+- [x] Add role verification in AdminBaseController
+- [x] Add server-side validation to SubscriptionController changeDeliveryMenu method
+- [x] Fix SubscriptionController class extension to AdminBaseController
+
 ## New Responsibilities: Admin-side Controls and Backend Validations
 - [ ] Review existing Admin Menu and Subscription controllers and models
 - [ ] Implement or improve weekday-based menu assignment
@@ -28,10 +43,10 @@
 - [ ] Achieve clean admin workflow, strong backend validations, and zero possibility of menu cross-mapping across weekdays or subscription plans
 
 ## Specific Tasks
-- [ ] Analyze SubscriptionController.php changeDeliveryMenu method
-- [ ] Update MenuModel to include weekday-based queries
-- [ ] Modify SubscriptionDeliveryModel to enforce weekday constraints
-- [ ] Add validation in SubscriptionController for menu changes
-- [ ] Ensure only active menus are selectable
-- [ ] Prevent cross-weekday menu assignments
-- [ ] Test backward compatibility with existing data
+- [x] Analyze SubscriptionController.php changeDeliveryMenu method
+- [x] Update MenuModel to include weekday-based queries
+- [x] Modify SubscriptionDeliveryModel to enforce weekday constraints
+- [x] Add validation in SubscriptionController for menu changes
+- [x] Ensure only active menus are selectable
+- [x] Prevent cross-weekday menu assignments
+- [x] Test backward compatibility with existing data

@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
+use App\Controllers\Admin\AdminBaseController;
 use App\Models\SubscriptionPlanModel;
 use App\Models\SubscriptionPlanNutritionModel;
 use App\Models\SubscriptionPlanConfigModel;
@@ -10,7 +10,7 @@ use App\Models\SubscriptionPlanChoiceModel;
 use App\Models\MenuModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
-class SubscriptionPlans extends BaseController
+class SubscriptionPlans extends AdminBaseController
 {
     protected SubscriptionPlanModel $plans;
     protected SubscriptionPlanNutritionModel $nutrition;

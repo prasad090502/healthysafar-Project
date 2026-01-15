@@ -10,7 +10,7 @@ use App\Models\SubscriptionModel;
 use App\Models\MenuModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
-class SubscriptionDeliveries extends BaseController
+class SubscriptionDeliveries extends AdminBaseController
 {
     protected SubscriptionDeliveryModel $deliveries;
     protected SubscriptionPlanModel $plans;

@@ -2,12 +2,12 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
+use App\Controllers\Admin\AdminBaseController;
 use App\Models\SubscriptionModel;
 use App\Models\SubscriptionPlanModel;
 use App\Models\SubscriptionDeliveryModel;
 
-class Subscriptions extends BaseController
+class Subscriptions extends AdminBaseController
 {
     protected SubscriptionModel $subscriptions;
     protected SubscriptionPlanModel $plans;

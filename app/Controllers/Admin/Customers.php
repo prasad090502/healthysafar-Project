@@ -2,12 +2,12 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
+use App\Controllers\Admin\AdminBaseController;
 use App\Models\CustomerModel;
 use App\Models\OrderModel;
 use App\Models\CustomerAddressModel;
 
-class Customers extends BaseController
+class Customers extends AdminBaseController
 {
     protected $customers;
     protected $orders;

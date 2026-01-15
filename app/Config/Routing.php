@@ -93,6 +93,12 @@ class Routing extends BaseRouting
      * defined routes.
      *
      * If FALSE, will stop searching and do NO automatic routing.
+     *
+     * SECURITY: Auto routing is DISABLED for security reasons.
+     * In admin authentication scenarios, auto routing can allow
+     * unauthorized access to controller methods without explicit
+     * route definitions and filters, potentially exposing sensitive
+     * admin functionality.
      */
     public bool $autoRoute = false;
 

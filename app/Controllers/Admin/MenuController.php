@@ -2,10 +2,10 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
+use App\Controllers\Admin\AdminBaseController;
 use App\Models\MenuModel;
 
-class MenuController extends BaseController
+class MenuController extends AdminBaseController
 {
     protected $menuModel;
 

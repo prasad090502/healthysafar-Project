@@ -7,10 +7,21 @@ use App\Models\SubscriptionDeliveryModel;
 use App\Models\SubscriptionModel;
 use App\Models\MenuModel;
 
-class SubscriptionController extends BaseController
+class SubscriptionController extends AdminBaseController
 {
     public function changeDeliveryMenu()
     {
+        // Server-side validation
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'delivery_id' => 'required|integer|greater_than[0]',
+            'menu_id'     => 'required|integer|greater_than[0]'
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('error', $validation->getErrors());
+        }
+
         $deliveryId = (int) $this->request->getPost('delivery_id');
         $menuId     = (int) $this->request->getPost('menu_id');
 

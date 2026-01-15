@@ -2,11 +2,11 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
+use App\Controllers\Admin\AdminBaseController;
 use App\Models\ProductModel;
 use Config\Database;
 
-class Products extends BaseController
+class Products extends AdminBaseController
 {
     protected ProductModel $products;
     protected int $perPage = 12;

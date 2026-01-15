@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
+use App\Controllers\Admin\AdminBaseController;
 use App\Models\OrderModel;
 use App\Models\CustomerModel;
 use App\Models\ProductModel;
@@ -10,7 +10,7 @@ use App\Models\OrderItemModel;
 // If you have a CategoryModel, you can also use it
 // use App\Models\CategoryModel;
 
-class Dashboard extends BaseController
+class Dashboard extends AdminBaseController
 {
     protected $db;
     protected $orders;
@@ -20,6 +20,11 @@ class Dashboard extends BaseController
 
     public function __construct()
     {
+        $session = session();
+        if (!$session->get('isAdminLogged')) {
+            return redirect()->to(site_url('admin/login'))->send();
+        }
+
         $this->db         = db_connect();
         $this->orders     = new OrderModel();
         $this->customers  = new CustomerModel();
